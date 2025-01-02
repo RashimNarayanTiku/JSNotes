@@ -1,3 +1,38 @@
+// ----- Implement Event Emitter ------
+Question: https://devtools.tech/questions/s/how-to-implement-event-emitter-in-javascript-or-facebook-interview-question---qid---J4fNqXImp6QIdGMc7SPF
+
+// class Emitter {
+//   constructor() {
+//     this.emitter = {}
+//   }
+
+//   subscribe(eventName, callback) {
+//     let released = false;
+//     let id = Symbol();
+//     if (!this.emitter.hasOwnProperty(eventName)) {
+//       this.emitter[eventName] = {};
+//     }
+//     this.emitter[eventName][id] = callback;
+
+//     return {
+//       release: () => {
+//         if (released) throw TypeError('Already released');
+//         delete this.emitter[eventName][id];
+//         released = true;
+//       }
+//     }
+//   }
+
+//   emit(eventName, ...params) {
+//     if (this.emitter.hasOwnProperty(eventName)) {
+//       Object.getOwnPropertySymbols(this.emitter[eventName]).forEach(keys => {
+//         this.emitter[eventName][keys](...params);
+//       });
+//     }
+//   }
+// }
+
+
 // -------- CHATGPT DEBOUNCE ----------
 
 // function debounce(func, wait) {
