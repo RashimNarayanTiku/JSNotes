@@ -264,27 +264,17 @@ Question: https://devtools.tech/questions/s/how-to-implement-event-emitter-in-ja
 
 // --------------- IMPLEMENT Promise.finally -------------------------
 
-// Promise.prototype.finallyy = function (callback) {
-//   return new Promise((resolve, reject) => {
-//     // Implementation might be different in some place, they can use `this`.then() etc..
-//     Promise.resolve(this)
-//       .then((data) => {
-//         callback();
-//         resolve(data);
-//       })
-//       .catch((error) => {
-//         callback();
-//         reject(error);
-//       });
-//   });
-// }
+// Promise.prototype.finally = function (callback) {
+//   return this.then(
+//     (value) => Promise.resolve(callback()).then(() => value),
+//     (reason) => Promise.resolve(callback()).then(() => { throw reason; })
+//   );
+// };
 
-// let callback = () => console.log('This will be called regardless of the outcome');
+// Promise.resolve(42)
+//   .finally(() => new Promise((res) => setTimeout(res, 1000)))  //The finally callback is async, which is handled on 269/270 line by Promise.resolve() instead of directly calling it.
+//   .then(console.log); // Logs after 1 second: 42 (waits for callback)
 
-// new Promise((resolve, reject) => setTimeout(() => reject(1), 1000))
-//   .then((data)=>console.log(data))
-//   .catch((error)=>console.log("Error is:",error))
-//   .finallyy(callback);
 
 
 // --------------- THROTTLING PROMISES BY BATCHING -------------------------
