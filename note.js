@@ -82,28 +82,21 @@ Question: https://devtools.tech/questions/s/how-to-implement-event-emitter-in-ja
 
 // -------- MY THROTTLE ----------
 
-// function throttle(waitTime) {
-//   let lastCalledTime;
-
-//   return function func(fn, ...args) {
-//     let timeSpent = null;
-//     curTime = new Date().getTime();
-//     if(lastCalledTime) timeSpent = curTime - lastCalledTime;
-
-//     if(!timeSpent || timeSpent > waitTime) {
-//       fn(...args);
-//       lastCalledTime = curTime;
-//     } else {
-//       console.log('slow down ya dawg');
+// function throttle(fn) {
+// 	let cooldown = false;
+//   return function f(...args) {
+//   	if(!cooldown) {
+//       fn.call(this, ...args);
+//     	cooldown = true;
+//       setTimeout(()=>cooldown=false, 1000);
 //     }
 //   }
 // }
 
-// function a(num1, num2) {
-//   console.log('resize a', num1, num2);
+// function log(event) {
+// 	console.log(event.target.value);
 // }
-// const throttle1sec = throttle(1000);
-// window.addEventListener('resize', () => throttle1sec(a));
+// const tlog = throttle(log);
 
 
 // -------- CURRYING ----------
