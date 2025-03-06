@@ -325,24 +325,22 @@ Question: https://devtools.tech/questions/s/how-to-implement-event-emitter-in-ja
 
 // ---------------------- AUTO RETRY PROMISE ----------------------------
 
-// const autoRetry = (generatePromise, retriesAllowed) => {
-//   return new Promise((resolve, reject) => {
-//     const attempt = () => {
-//       generatePromise()
-//         .then(resolve)
-//         .catch((error) => {
-//           if(retriesAllowed === 0) {
-//             reject(error);
-//           } else {
-//             retriesAllowed--;
-//             console.log('retries left is:', retriesAllowed)
-//             attempt();
-//           }
-//         });
-//     }
-//     attempt();
-//   });
-// }
+
+async function fetchWithAutoRetry(fetcher, maximumRetryCount) {
+  let lastError = null;
+
+  return new Promise(async (res, rej) => {
+    for (let i = 0; i <= maximumRetryCount; i++) {
+      try {
+        const data = await Promise.resolve(fetcher());
+        return res(data);
+      } catch (e) {
+        lastError = e;
+      }
+    }
+    return rej(lastError);
+  });
+}
 
 
 // // Function is required instead of Promise directly to make unreliable promise (for some unknown reason) 
