@@ -359,6 +359,8 @@ Question: https://devtools.tech/questions/s/how-to-implement-event-emitter-in-ja
 
 // ----------------------- CALL / APPLY / BIND -------------------------------
 
+Symbol Docs: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+
 // ========== CALL =============
 // Function.prototype.mycall = function (obj, ...args) {
 //   const sym = Symbol();
